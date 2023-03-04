@@ -1,3 +1,4 @@
+import "../../lib/sdk.js"
 import "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@4.2.0/dist/tf-core.min.js"
 import "https://unpkg.com/@tensorflow/tfjs-backend-webgl@3.7.0/dist/tf-backend-webgl.min.js"
 import "https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/hands.min.js"
@@ -10,6 +11,8 @@ import HandGestureView from "../views/handGestureView.js"
 import Camera from "../../../../lib/shared/camera.js"
 import { fingerLookupIndexes, knowGestures, gestureStrings } from "../utils/util.js"
 
+const styler = new PseudoStyler();
+
 const camera = await Camera.init()
 
 const factory = {
@@ -17,7 +20,8 @@ const factory = {
     return HandGestureController.initialize({
       camera,
       view: new HandGestureView({
-        fingerLookupIndexes
+        fingerLookupIndexes,
+        styler
       }),
       service: new HandGestureService({
         knowGestures,
